@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import ProductContextProvider from './contexts/ProductContext';
-import CartContextProvider from './contexts/CartContext';
+import { ProductProvider } from './contexts/ProductContext';
+import { CartProvider } from './contexts/CartContext';
 
 import Navigation from './components/Navigation';
 import Products from './components/Products';
@@ -10,8 +10,8 @@ import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   return (
-    <CartContextProvider>
-      <ProductContextProvider>
+    <CartProvider>
+      <ProductProvider>
         <div className="App">
           <Navigation />
           <main className="content">
@@ -23,8 +23,8 @@ function App() {
             </Route>
           </main>
         </div>
-      </ProductContextProvider>
-    </CartContextProvider>
+      </ProductProvider>
+    </CartProvider>
   );
 }
 
