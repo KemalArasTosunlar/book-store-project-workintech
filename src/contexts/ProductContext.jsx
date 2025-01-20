@@ -1,9 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { CartContext } from './CartContext';
 
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const { addItem } = useContext(CartContext); // Accessing addItem from CartContext
 
   const fetchProducts = async () => {
     // Sample product data
@@ -16,12 +18,16 @@ export const ProductProvider = ({ children }) => {
     setProducts(sampleProducts);
   };
 
+  const handleAddItem = (item) => {
+    addItem(item); // Call the addItem function from CartContext
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider value={{ products, addItem: handleAddItem }}>
       {children}
     </ProductContext.Provider>
   );
